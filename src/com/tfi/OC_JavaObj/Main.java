@@ -1,4 +1,4 @@
-package com.tfi;
+package com.tfi.OC_JavaObj;
 
 public class Main {
 
