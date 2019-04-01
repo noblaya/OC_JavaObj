@@ -1,5 +1,7 @@
 package com.tfi.OC_JavaObj;
 
+import com.tfi.OC_JavaObj.shop.*;
+
 public class Main {
 
     public static void main(String[] args) {

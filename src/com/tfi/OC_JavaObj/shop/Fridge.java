@@ -1,4 +1,4 @@
-package com.tfi.OC_JavaObj;
+package com.tfi.OC_JavaObj.shop;
 
 public class Fridge extends Product{
     private int liter;
