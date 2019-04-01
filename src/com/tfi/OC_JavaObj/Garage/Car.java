@@ -33,6 +33,14 @@ public class Car extends Vehicule{
         System.out.println( "Je ferme le coffre de ma " + getManufacturer() + " " + getModelName() + "%n");
     }
 
+    @Override
+    public void start(){
+        System.out.println("Je suis une " + manufacturer + " " + modelName + ", je consomme " + literPer100km + " " + " et je démarre mon " + engine + "." + "%n");
+    }
+    @Override
+    public void stop(){
+        System.out.println("Je suis une " + manufacturer + " " + modelName + ", je consomme " + literPer100km + " " + " et j'éteind mon " + engine + "." + "%n");
+    }
 
     //Getters
     public int getDoor() {

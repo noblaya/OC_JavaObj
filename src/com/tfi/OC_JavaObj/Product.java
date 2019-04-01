@@ -1,9 +1,9 @@
 package com.tfi.OC_JavaObj;
 
 public class Product {
-    private String name;
-    private String description;
-    private double price;
+    protected String name;
+    protected String description;
+    protected double price;
 
     public Product(String name, String description, Double price) {
         this.name = name;
