@@ -13,6 +13,11 @@ public class Main {
 	Delivery delivery = new ExpressDelivery("Perpignan");
 
 	Bill bill = new Bill(customer,delivery);
+	try {
+		bill.generate(new FileWriter("facture_leblanc"));
+	} catch (NoProductInBillException e) {
+		System.err.println("Pas de produit dans la facture.");
+	}
 	bill.addProduct(cafe, 1);
 	bill.addProduct(tv, 1);
 	bill.addProduct(fridge, 1);
