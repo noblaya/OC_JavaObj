@@ -41,8 +41,8 @@ class BillTest {
 
         bill.generate(writerMock);
 
-        int lineNumber = output.split("\n").length;
-        assertEquals(20, lineNumber);
+        int lineNumber = output.split("%n").length;
+        assertEquals(21, lineNumber);
 
     }
 

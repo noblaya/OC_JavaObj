@@ -1,8 +1,8 @@
 package com.tfi.OC_JavaObj.shop;
 
 public class Television extends Product {
-    private int size;
-    private String slabType;
+    private int size = 0;
+    private String slabType = "";
 
     public Television(String name, String description, Double price, Integer size, String slabType) {
         super(name, description, price);

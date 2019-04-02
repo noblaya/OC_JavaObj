@@ -1,8 +1,8 @@
 package com.tfi.OC_JavaObj.shop;
 
 public class Fridge extends Product{
-    private int liter;
-    private boolean freezer;
+    private int liter = 0;
+    private boolean freezer = true;
 
     public Fridge(String name, String description, Double price, Integer liter, Boolean freezer) {
         super(name, description, price);

@@ -1,9 +1,9 @@
 package com.tfi.OC_JavaObj.shop;
 
 public class Product {
-    protected String name;
-    protected String description;
-    protected double price;
+    protected String name = "";
+    protected String description = "";
+    protected double price = 0.0;
 
     public Product(String name, String description, Double price) {
         this.name = name;
