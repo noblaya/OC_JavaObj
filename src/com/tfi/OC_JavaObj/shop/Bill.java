@@ -5,8 +5,9 @@ import java.util.Map;
 public class Bill {
     private Customer customer;
     private Map<Product, Integer> products;
+    private Delivery delivery;
 
-    public Bill(Customer customer){
+    public Bill(Customer customer, Delivery delivery){
         this.customer = customer;
     }
 
@@ -25,5 +26,13 @@ public class Bill {
 
     public Map<Product, Integer> getProducts() {
         return products;
+    }
+
+    public void generate(Writer writer) {
+
+    }
+
+    public double getTotal(){
+        return 0;
     }
 }
