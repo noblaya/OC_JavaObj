@@ -29,7 +29,7 @@ class BillTest {
 
     private Customer customer = new Customer("Juste Leblanc", "19 rue Germain Pilon, Paris");
 
-    private Delivery lowCoastRelayDelivery = new RelayDelivery(27);
+    private Delivery lowCoastRelayDelivery = new com.tfi.OC_JavaObj.shop.RelayDelivery(27);
 
     @Test
     public void Given_2ProductsAndDelivery_When_generatingBill_Then_getGoodLineNumber() {
