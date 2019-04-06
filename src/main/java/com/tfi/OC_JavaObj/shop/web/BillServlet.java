@@ -1,8 +1,6 @@
 package com.tfi.OC_JavaObj.shop.web;
 
-import com.tfi.OC_JavaObj.shop.Product;
-import com.tfi.OC_JavaObj.shop.Fridge;
-import com.tfi.OC_JavaObj.shop.Television;
+import com.tfi.OC_JavaObj.shop.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,7 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class BillServlet extends HttpServlet {
 
@@ -32,7 +32,7 @@ public class BillServlet extends HttpServlet {
         if (req.getQueryString() == null)
             displayFrom(resp);
         else
-            displayBill(resp);
+            displayBill(resp,req);
     }
 
 
@@ -59,6 +59,72 @@ public class BillServlet extends HttpServlet {
         resp.getWriter().println(form);
     }
 
-    private void displayBill(HttpServletResponse resp) {
+
+
+    public Map<String, String> splitParameters(String querryString) {
+        String[] brutParams = querryString.split("&");
+        Map<String,String> params = new HashMap<>();
+
+        for (String brutParam : brutParams) {
+            String[] keyAndValue = brutParam.split("=");
+            if (keyAndValue.length == 2)
+                params.put(keyAndValue[0], keyAndValue[1]);
+        }
+        return params;
     }
+
+    private void displayBill(HttpServletResponse resp, HttpServletRequest req) {
+        //Client et Livraison
+        Map<String, String> params = splitParameters(req.getQueryString());
+        Customer customer = new Customer(params.get("fullName"), params.get("adress"));
+        Delivery delivery = null;
+        switch (params.get("deliveryMode")) {
+            case "direct" :
+                delivery = new DirectDelivery();
+                break;
+            case "relay" :
+                delivery = new RelayDelivery(Integer.parseInt(params.get("deliveryInfo")));
+                break;
+            case "express" :
+                delivery = new ExpressDelivery(params.get("deliveryInfo"));
+                break;
+            case "takeAway" :
+                delivery = new TakeAwayDelivery();
+                break;
+        }
+
+        //Facture
+        Bill bill = new Bill(customer, delivery);
+        String[] productsParams = params.get("products").split("%0D&%0A");
+        for (String productLine : productsParams) {
+            String[] productAndQuantity  = productLine.split("%3A");
+            Product product = products.get(Integer.parseInt(productAndQuantity[0]));
+            Integer quantity = Integer.parseInt(productAndQuantity[1]);
+
+            bill.addProduct(product, quantity);
+        }
+
+        bill.generate(new Writer() {
+            @Override
+            public void start() {
+
+            }
+
+            @Override
+            public void writeLine(String line) {
+                try {
+                    resp.getWriter().println("<br/>" + line);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void stop() {
+
+            }
+        });
+
+    }
+
 }
